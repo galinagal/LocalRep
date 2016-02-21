@@ -8,11 +8,11 @@ class Developer
   end
   def add_task(task)
     @task_list << task
-    if @task_list.size>MAX_TASKS
-      raise ArgumentError, "Слишком много работы"
-    else
-      puts %Q{#{@name}: добавлена задача "#{task}". Всего в списке задач: #{@task_list.count}}
-    end
+      if @task_list.size>MAX_TASKS
+        raise ArgumentError, "Слишком много работы"
+      else
+        puts %Q{#{@name}: добавлена задача "#{task}". Всего в списке задач: #{@task_list.count}}
+      end
   end
   def work!
       if @task_list.empty?
@@ -28,14 +28,14 @@ class Developer
   def status
     if @task_list.empty?
       puts 'Свободен'
-    elsif @task_list.size>MAX_TASKS
+    elsif @task_list.size>=MAX_TASKS
       puts 'Занят'
     else 
       puts 'Работаю'
     end
   end
   def can_add_task?
-    if @task_list.size>MAX_TASKS
+    if @task_list.size>=MAX_TASKS
       return false 
     else 
       return true 
@@ -44,10 +44,18 @@ class Developer
   def can_work?
     if @task_list.empty?
       return true
-    elsif  @task_list.size>MAX_TASKS
+    elsif  @task_list.size>=MAX_TASKS
       return false
     else
       return true
+    end
+  end
+end
+module Workers
+  class JuniorDeveloper<Developer
+    MAX_TASKS=5
+    def work!
+      puts %Q{#{@name}: пытаюсь делать задачу "#{@task_list.shift}". Осталось задач:#{@task_list.count}}
     end
   end
 end

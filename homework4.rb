@@ -31,9 +31,9 @@ class Team
   def priority(*team_list)
     *@priority=team_list
   end
-  #def report(type)
-    #all.each{|dev| puts "#{dev.name} (#{dev.type.to_s}): #{dev.task_list.join(", ")}"}
-  #end
+  def report
+    all.each{|dev| puts "#{dev.name} (#{dev.type.to_s}): #{dev.task_list.join(", ")}"}
+  end
 end
 
 team= Team.new do 

@@ -56,7 +56,9 @@ class Developer
   end
 end
 class JuniorDeveloper<Developer
-  def initialize
+  def initialize(name)
+    @name = name
+    @task_list = []
     @type = :junior
   end
   MAX_TASKS=5
@@ -65,7 +67,9 @@ class JuniorDeveloper<Developer
   end
 end
 class SeniorDeveloper<Developer
-  def initialize
+  def initialize(name)
+    @name = name
+    @task_list = []
     @type = :senior
   end
   MAX_TASKS=15

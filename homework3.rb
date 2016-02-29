@@ -1,10 +1,11 @@
 class Developer
-  attr_reader :name, :task_list
+  attr_reader :name, :task_list, :type
   MAX_TASKS= 10
   
   def initialize(name)
     @name = name
     @task_list = []
+    @type = :developer
   end
   def add_task(task)
     @task_list << task
@@ -50,12 +51,26 @@ class Developer
       return true
     end
   end
-end
-module Workers
-  class JuniorDeveloper<Developer
-    MAX_TASKS=5
-    def work!
-      puts %Q{#{@name}: пытаюсь делать задачу "#{@task_list.shift}". Осталось задач:#{@task_list.count}}
-    end
+  def max_tasks
+    self.class::MAX_TASKS
   end
 end
+class JuniorDeveloper<Developer
+  def initialize
+    @type = :junior
+  end
+  MAX_TASKS=5
+  def work!
+    puts %Q{#{@name}: пытаюсь делать задачу "#{@task_list.shift}". Осталось задач:#{@task_list.count}}
+  end
+end
+class SeniorDeveloper<Developer
+  def initialize
+    @type = :senior
+  end
+  MAX_TASKS=15
+  def work!
+    puts %Q{#{@name}: выполнена задача "#{@task_list.shift}". Осталось задач:#{@task_list.count}}
+  end
+end
+
